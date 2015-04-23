@@ -1,6 +1,6 @@
 # libreria-angular
 Tutorial de Angular.js en jotaeseymas.wordpress.com
-# Directorios
+# Contenido
 ```
 .
 ├── angular.min.js
