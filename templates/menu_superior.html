@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span><i class="fa fa-bars fa-fw"></i></span>
+		</button>
+		<a class="navbar-brand" href="#!"><i class="fa fa-home fa-fw"></i>Libreria Angular</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<form class="navbar-form navbar-left" role="search">
+			<div class="form-group row">
+				<div class="col-xs-12">
+					<input type="text" ng-model="$parent.busqueda" class="form-control" placeholder="Busque sus libros aquí">
+				</div>
+			</div>
+		</form>
+		<ul class="nav navbar-nav">
+			<li><a href="#!" data-toggle="modal" data-target="#addLibro"><i class="fa fa-plus fa-fw"></i>Agregar Nuevo Libro</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right" ng-controller="CategoriasCtrl">
+			<li class="dropdown">
+				<a href="#!" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa fw"></i> Ver Categorías <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#!" data-toggle="modal" data-target="#addCategoria"><i class="fa fa-check fa-fw"></i>Añadir Categoría</a></li>
+					<li ng-repeat="categoria in categorias"><a href="#!"><i class="fa fa-caret-square-o-right fa-fw"></i>{{categoria.nombre | uppercase}}</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div><!-- /.navbar-collapse -->
+</nav>
