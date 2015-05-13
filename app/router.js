@@ -7,5 +7,9 @@ libreria.config(['$routeProvider', function($routeProvider){
 			templateUrl: rootDir+'/libros.html',
 			controller: 'LibrosCtrl'
 		})
+		.when('/categorias/:categoria', {
+			templateUrl: rootDir+'/categorias.html',
+			controller: 'LibrosCtrl'
+		})
 		.otherwise({ redirectTo: '/' });
 }]);

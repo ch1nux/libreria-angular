@@ -1,13 +1,15 @@
 <div class="modal fade" id="addCategoria" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header" ng-controller="CategoriasCtrl">
-				<button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Añadir Categoría {{categorias.length+1}}</h4>
-			</div>
-			<div class="modal-body">
-				Nombre: <input type="text" placeholder="Escriba la categoría" ng-model="nombre">
-				<button data-dismiss="modal" class="btn btn-sm btn-primary">Añadir</button>
+			<div ng-controller="CategoriasCtrl">			
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Añadir Categoría {{categorias.length+1}}</h4>
+				</div>
+				<div class="modal-body">
+					Nombre: <input type="text" placeholder="Escriba la categoría" ng-model="nombre">
+					<button data-dismiss="modal" class="btn btn-sm btn-primary" ng-click="addCategoria(nombre)">Añadir</button>
+				</div>
 			</div>
 		</div>
 	</div>
