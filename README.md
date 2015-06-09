@@ -6,11 +6,13 @@ libreria-angular/
 ├── app
 │   ├── controllers.js
 │   ├── factories.js
-│   └── router.js
+│   ├── router.js
+│   └── service.js
 ├── external
 │   ├── angular.min.js
 │   ├── angular-route.min.js
 │   ├── bootstrap.min.js
+│   ├── Dexie.min.js
 │   └── jquery-1.11.1.min.js
 ├── index.html
 ├── README.md
@@ -35,5 +37,5 @@ libreria-angular/
     ├── nueva_categoria.html
     └── nuevo_libro.html
 
-7 directories, 24 files
+7 directories, 26 files
 ```
