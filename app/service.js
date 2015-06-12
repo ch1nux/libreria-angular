@@ -1,6 +1,6 @@
-var app = angular.module('crud');
+var libreria = angular.module('libreria-angular'); //Se instancia de manera global
 
-app.service('$crud', ['$q', function($q) {
+libreria.service('$crud', ['$q', function($q) {
 
 	// Instancia de Dexie
 	var _db = new Dexie('libreria-angular');
