@@ -28,10 +28,20 @@ libreria.controller('CategoriasCtrl', ['$scope', 'categorias', function($scope, 
 
 //Controller para administrar los libros
 libreria.controller('LibrosCtrl', ['$scope', 'libreria', '$routeParams', function($scope, libreria, $routeParams) {
+
 	$scope.listaLibros = libreria.listaLibros;
 
 	$scope.filtrarLibros = function(){
 		return libreria.filtrarLibros(parseInt($routeParams.categoria, 10));
+	};
+
+	$scope.addLibro = function(libro) {
+		//TODO: Validación de campos vacíos e inconsistencia de valores
+		if (typeof libro === "object"){
+			libreria.addLibro(libro);
+		} else {
+			console.log("No se pudo insertar el libro!");
+		}
 	};
 
 }]);
