@@ -2,22 +2,22 @@
 Tutorial de Angular.js en jotaeseymas.wordpress.com
 # Contenido
 ```
-libreria-angular/
+libreria-angular
 ├── app
-│   ├── controllers.js
 │   ├── controllers-classy.js
+│   ├── controllers.js
 │   ├── factories.js
 │   ├── router.js
 │   └── service.js
 ├── external
-│   ├── angular.min.js
 │   ├── angular-classy.min.js
+│   ├── angular.min.js
 │   ├── angular-route.min.js
 │   ├── bootstrap.min.js
 │   ├── Dexie.min.js
 │   └── jquery-1.11.1.min.js
 ├── index.html
-├── index2.html
+├── LICENSE
 ├── README.md
 ├── styles
 │   ├── bootstrap.cerulean.min.css
@@ -40,5 +40,5 @@ libreria-angular/
     ├── nueva_categoria.html
     └── nuevo_libro.html
 
-7 directories, 26 files
+7 directories, 29 files
 ```
