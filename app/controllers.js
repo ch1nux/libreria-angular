@@ -5,10 +5,10 @@ var libreria = angular.module('LibreriaApp', ['ngRoute']);
 libreria.controller('TemplateCtrl', ['$scope', function($scope) {
 	var rootDir = 'templates/';
 	$scope.templates = [
-		{url : rootDir+'menu_superior.html'},
-		{url : rootDir+'nuevo_libro.html'},
-		{url : rootDir+'nueva_categoria.html'},
-		{url : rootDir+'comprar.html'}
+		{url: rootDir+'menu_superior.html'},		//templates[0]
+		{url: rootDir+'nuevo_libro.html'},			//templates[1]
+		{url: rootDir+'nueva_categoria.html'},	//templates[2]
+		{url: rootDir+'comprar.html'}						//templates[3]
 	];
 }]);
 
@@ -22,7 +22,7 @@ libreria.controller('CategoriasCtrl', ['$scope', 'categorias', function($scope, 
 
 	$scope.addCategoria = function(nombre){
 		categorias.addCategoria(nombre);
-	}
+	};
 
 }]);
 
@@ -31,7 +31,7 @@ libreria.controller('LibrosCtrl', ['$scope', 'libreria', '$routeParams', functio
 	$scope.listaLibros = libreria.listaLibros;
 
 	$scope.filtrarLibros = function(){
-		return libreria.filtrarLibros(parseInt($routeParams.categoria));
+		return libreria.filtrarLibros(parseInt($routeParams.categoria, 10));
 	};
 
 }]);

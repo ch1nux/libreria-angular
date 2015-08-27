@@ -2,7 +2,7 @@ var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
 
 libreria.factory('libreria', [function () {
 	var libreria = {};
-	
+
 	libreria.listaLibros = [
 		{
 			titulo: "Lo que el viento se llevó",
@@ -42,7 +42,7 @@ libreria.factory('libreria', [function () {
 		}
 	];
 
-	libreria.filtrarLibros = function(categoria){		 
+	libreria.filtrarLibros = function(categoria){
 		return libreria.listaLibros.filter(function(libro) {
 			return libro.categoria === categoria;
 		});

@@ -6,26 +6,48 @@
 				<h4 class="modal-title">Agregar Nuevo Libro</h4>
 			</div>
 			<div class="modal-body">
-				<section>
-					<label for="1">Item 1</label>
-					<input class="form-control" type="text" ng-model="item1" id="1">
-				</section>
-				<section>
-					<label for="2">Item 2</label>
-					<input class="form-control" type="text" ng-model="item2" id="2">
-				</section>
-				<section>
-					<label for="3">Item 3</label>
-					<input class="form-control" type="text" ng-model="item3" id="3">
-				</section>
-				<section>
-					<label for="4">Item 4</label>
-					<input class="form-control" type="text" ng-model="item4" id="4">
-				</section><br>
-				<section>
-					<button class="btn btn-primary btn-sm" data-dismiss="modal">Añadir</button>
-					<button class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
-				</section>
+				<form name="libroForm" novalidate>
+					<div class="form-group"
+					ng-class="{'has-error': libroForm.titulo.$invalid && libroForm.titulo.$dirty, 'has-success': libroForm.titulo.$valid && libroForm.titulo.$dirty}">
+						<label for="titulo">Título</label>
+						<input type="text" class="form-control" ng-model="libro.titulo" name="titulo" id="titulo" required pattern="[A-Za-zñáéíóú\s\.]+">
+					</div>
+					<div class="form-group"
+					ng-class="{'has-error': libroForm.autor.$invalid && libroForm.autor.$dirty, 'has-success': libroForm.autor.$valid && libroForm.autor.$dirty}">
+						<label for="autor">Autor</label>
+						<input type="text" class="form-control" ng-model="libro.autor" name="autor" id="autor" required pattern="[A-Za-zñáéíóú\s\.]+">
+					</div>
+					<div class="form-group"
+					ng-class="{'has-error': libroForm.anio.$invalid && libroForm.anio.$dirty, 'has-success': libroForm.anio.$valid && libroForm.anio.$dirty}">
+						<label for="anio">Anio</label>
+						<input type="number" class="form-control" ng-model="libro.anio" name="anio" id="anio" required pattern="\d{4}" maxlength="4" min="1234" max="2015">
+					</div>
+					<!-- TODO: Va un input:select rellenado con CategoriasCtrl -->
+					<div class="form-group"
+					ng-class="{'has-error': libroForm.categoria.$invalid && libroForm.categoria.$dirty, 'has-success': libroForm.categoria.$valid && libroForm.categoria.$dirty}" ng-controller="CategoriasCtrl">
+						<label for="categoria">Categoría</label>
+						<select class="form-control" ng-model="libro.categoria" name="categoria" id="categoria" required ng-options="categoria.categoria as categoria.nombre | uppercase for categoria in categorias">
+							<option value="">- SELECCIONE -</option>
+						</select>
+					</div>
+					<div class="form-group"
+					ng-class="{'has-error': libroForm.precio.$invalid && libroForm.precio.$dirty, 'has-success': libroForm.precio.$valid && libroForm.precio.$dirty}">
+						<label for="precio">Precio</label>
+						<input type="text" class="form-control" ng-model="libro.precio" name="precio" id="precio" required pattern="\d+(\.\d{1,2})?">
+					</div>
+					<div class="form-group"
+					ng-class="{'has-error': libroForm.inventario.$invalid && libroForm.inventario.$dirty, 'has-success': libroForm.inventario.$valid && libroForm.inventario.$dirty}">
+						<label for="inventario">Inventario</label>
+						<input type="number" class="form-control" ng-model="libro.inventario" name="inventario" id="inventario" required pattern="\d+" minlength="1" min="0">
+					</div>
+					<div class="row">
+						<span class="col-xs-1"></span>
+						<button ng-disabled="libroForm.$invalid" class="btn btn-primary col-xs-4" data-dismiss="modal" ng-click="">Añadir</button>
+						<span class="col-xs-1"></span>
+						<button class="btn btn-danger col-xs-4" data-dismiss="modal">Cancelar</button>
+						<span class="col-xs-1"></span>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

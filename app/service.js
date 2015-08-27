@@ -1,4 +1,4 @@
-var libreria = angular.module('libreria-angular'); //Se instancia de manera global
+var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
 
 libreria.service('$crud', ['$q', function($q) {
 
