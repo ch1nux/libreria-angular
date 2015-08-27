@@ -16,7 +16,6 @@ libreria-angular
 │   ├── bootstrap.min.js
 │   ├── Dexie.min.js
 │   └── jquery-1.11.1.min.js
-├── form.html
 ├── index.html
 ├── LICENSE
 ├── README.md
@@ -41,5 +40,5 @@ libreria-angular
     ├── nueva_categoria.html
     └── nuevo_libro.html
 
-7 directories, 30 files
+7 directories, 29 files
 ```
