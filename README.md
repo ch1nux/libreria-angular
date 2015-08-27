@@ -5,16 +5,19 @@ Tutorial de Angular.js en jotaeseymas.wordpress.com
 libreria-angular/
 ├── app
 │   ├── controllers.js
+│   ├── controllers-classy.js
 │   ├── factories.js
 │   ├── router.js
 │   └── service.js
 ├── external
 │   ├── angular.min.js
+│   ├── angular-classy.min.js
 │   ├── angular-route.min.js
 │   ├── bootstrap.min.js
 │   ├── Dexie.min.js
 │   └── jquery-1.11.1.min.js
 ├── index.html
+├── index2.html
 ├── README.md
 ├── styles
 │   ├── bootstrap.cerulean.min.css
