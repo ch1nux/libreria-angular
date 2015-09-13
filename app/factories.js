@@ -47,13 +47,13 @@ libreria.factory('libreria', [function () {
 		return libreria.listaLibros.filter(function(libro) {
 			return libro.categoria === categoria;
 		});
-	}
+	};
 
 	libreria.addLibro = function(libro) {
 		//propiedad que define la visualización del botón "Comprar"
 		libro.existente = libro.existente || libro.inventario > 0 ? true : false;
 		libreria.listaLibros.push(libro);
-	}
+	};
 
 	return libreria;
 }]);
@@ -72,7 +72,7 @@ libreria.factory('categorias', [function() {
 		categorias.listaCategorias.push(
 			{categoria: categorias.listaCategorias.length+1, nombre: name}
 		);
-	}
+	};
 
 	return categorias;
 }]);
