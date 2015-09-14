@@ -24,7 +24,7 @@ libreria.config(['databaseProvider', 'librosProvider', 'categoriasProvider', fun
 	config[librosProvider.getCollection()] = '++id, ' + Object.keys(librosProvider.getData()).join(', ');
 	
 	// config.listaCategorias = { listaCategorias: '++id, categoria, nombre' }
-	// config[categoriasProvider.getCollection()] = '++id, ' + Object.keys(categoriasProvider.getData()).join(', ');
+	config[categoriasProvider.getCollection()] = '++id, ' + Object.keys(categoriasProvider.getData()).join(', ');
 
 	// config = { listaLibros: '++id, ~...', listaCategorias: '++id, ~...' }
 	DB.version(1).stores(config);
