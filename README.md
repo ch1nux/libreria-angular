@@ -4,9 +4,11 @@ Tutorial de Angular.js en jotaeseymas.wordpress.com
 ```
 libreria-angular
 ├── app
+│   ├── config.js
 │   ├── controllers-classy.js
 │   ├── controllers.js
 │   ├── factories.js
+│   ├── providers.js
 │   ├── router.js
 │   └── service.js
 ├── external
@@ -40,5 +42,5 @@ libreria-angular
     ├── nueva_categoria.html
     └── nuevo_libro.html
 
-7 directories, 29 files
+7 directories, 31 files
 ```
