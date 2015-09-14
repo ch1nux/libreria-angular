@@ -29,6 +29,15 @@ libreria.service('$crud', ['$q', function($q) {
 	// Instancia del API Promises Q+ de Angular
 	var _q = $q.defer();
 
+	this.vacio = function(){
+		_abrir();
+		_db.listaLibros.count().then(function(counter){
+			_q.resolve(counter); // Número de objetos existentes en la BD
+		});
+		_cerrar();
+		return _q.promise;
+	};
+
 	this.agregar = function(data){
 		_abrir();
 		_db.listaLibros.put(new _Libro(data)).then(function(data){
@@ -40,8 +49,8 @@ libreria.service('$crud', ['$q', function($q) {
 
 	this.modificar = function(id, data){
 		_abrir();
-		_db.listaLibros.update(id, new _Libro(data)).then(function(data){
-			_q.resolve(data); // Número de modificaciones realizadas
+		_db.listaLibros.update(id, new _Libro(data)).then(function(counter){
+			_q.resolve(counter); // Número de modificaciones realizadas
 		});
 		_cerrar();
 		return _q.promise;

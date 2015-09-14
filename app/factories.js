@@ -58,10 +58,11 @@ libreria.factory('libreria', [function () {
 	return libreria;
 }]);
 
-libreria.factory('categorias', [function() {
+libreria.factory('catalogo', [function() {
 	var categorias = {};
 
 	categorias.listaCategorias = [
+		{categoria: 0, nombre: "Sin Categoría"},
 		{categoria: 1, nombre: "Ciencia-Ficción"},
 		{categoria: 2, nombre: "Romance"},
 		{categoria: 3, nombre: "Histórica"},

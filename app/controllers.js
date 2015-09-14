@@ -1,5 +1,4 @@
-//Módulo principal de la aplicación, con Inyección de Dependencias
-var libreria = angular.module('LibreriaApp', ['ngRoute']);
+var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
 
 //Controller para administrar los templates
 libreria.controller('TemplateCtrl', ['$scope', function($scope) {
@@ -13,15 +12,15 @@ libreria.controller('TemplateCtrl', ['$scope', function($scope) {
 }]);
 
 //Controller para administrar las categorías
-libreria.controller('CategoriasCtrl', ['$scope', 'categorias', function($scope, categorias) {
-	$scope.categorias = categorias.listaCategorias;
+libreria.controller('CategoriasCtrl', ['$scope', 'catalogo', function($scope, catalogo) {
+	$scope.categorias = catalogo.listaCategorias;
 
 	$scope.nombrarCategoria = function(id){
 		return $scope.categorias[id-1].nombre;
 	};
 
 	$scope.addCategoria = function(nombre){
-		categorias.addCategoria(nombre);
+		catalogo.addCategoria(nombre);
 	};
 
 }]);
