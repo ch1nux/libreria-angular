@@ -70,7 +70,7 @@ libreria.provider('libros', [function() {
 //Provider de categorías para la estructura
 libreria.provider('categorias', [function() {
 	var _tabla, _data;
-	
+
 	return {
 		setCollection: function(colname) {
 			var my = this;
