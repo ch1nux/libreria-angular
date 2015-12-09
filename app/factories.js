@@ -3,6 +3,16 @@ var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
 libreria.factory('libreria', [function () {
 	var libreria = {};
 
+	libreria.Libro = function(o) {
+		this.titulo = o.titulo;
+		this.autor = o.autor;
+		this.anio = o.anio;
+		this.categoria = o.categoria;
+		this.precio = o.precio;
+		this.inventario = o.inventario;
+		this.existente = o.existente;
+	}
+
 	//Lista estática de libros
 	libreria.listaLibros = [
 		{
@@ -59,20 +69,25 @@ libreria.factory('libreria', [function () {
 }]);
 
 libreria.factory('catalogo', [function() {
-	var categorias = {};
+	var catalogo = {};
 
-	categorias.listaCategorias = [
+	catalogo.Categoria = function (o) {
+		this.categoria = o.categoria;
+		this.nombre = o.nombre;
+	};
+
+	catalogo.listaCategorias = [
 		{categoria: 1, nombre: "Ciencia-Ficción"},
 		{categoria: 2, nombre: "Romance"},
 		{categoria: 3, nombre: "Histórica"},
 		{categoria: 4, nombre: "Misterio"},
 	];
 
-	categorias.addCategoria = function(name){
-		categorias.listaCategorias.push(
-			{categoria: categorias.listaCategorias.length+1, nombre: name}
+	catalogo.addCategoria = function(name){
+		catalogo.listaCategorias.push(
+			{categoria: catalogo.listaCategorias.length+1, nombre: name}
 		);
 	};
 
-	return categorias;
+	return catalogo;
 }]);

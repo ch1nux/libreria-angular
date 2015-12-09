@@ -13,6 +13,7 @@ libreria.controller('TemplateCtrl', ['$scope', function($scope) {
 
 //Controller para administrar las categorías
 libreria.controller('CategoriasCtrl', ['$scope', 'catalogo', function($scope, catalogo) {
+
 	$scope.categorias = catalogo.listaCategorias;
 
 	$scope.nombrarCategoria = function(id){
@@ -26,9 +27,21 @@ libreria.controller('CategoriasCtrl', ['$scope', 'catalogo', function($scope, ca
 }]);
 
 //Controller para administrar los libros
-libreria.controller('LibrosCtrl', ['$scope', 'libreria', '$routeParams', function($scope, libreria, $routeParams) {
+libreria.controller('LibrosCtrl', ['$crud', '$scope', 'libreria', '$routeParams', function($crud, $scope, libreria, $routeParams) {
 
-	$scope.listaLibros = libreria.listaLibros;
+	$crud.vacio('listaLibros').then(function(counter) {
+		if (counter == 0) {
+			$crud.llenar('listaLibros', libreria.listaLibros, libreria.Libro);
+		} else {
+			console.log(counter);
+		}
+	});
+
+	$crud.obtenerTodo('listaLibros').then(function(lista) {
+		$scope.listaLibros = lista;
+	});
+
+	// $scope.listaLibros = libreria.listaLibros;
 
 	$scope.filtrarLibros = function(){
 		return libreria.filtrarLibros(parseInt($routeParams.categoria, 10));
@@ -39,7 +52,7 @@ libreria.controller('LibrosCtrl', ['$scope', 'libreria', '$routeParams', functio
 		if (typeof libro === "object"){
 			libreria.addLibro(libro);
 		} else {
-			console.log("No se pudo insertar el libro!");
+			console.error("No se pudo insertar el libro!");
 		}
 	};
 
