@@ -1,63 +1,64 @@
 // Instancia principal de la aplicación con inyección de dependencias
 var libreria = angular.module('LibreriaApp', ['ngRoute']);
 
-// //Provider para la base de datos de toda la app
-// libreria.provider('database', [function() {
-// 	var my = this;		//Cambio de $scope, ahora "my" es local
-// 	my._db = null;		//Almacena la instancia de base de datos
-
-// 	return {
-// 		setDatabase: function(dbname) {
-// 			my._db = new Dexie(dbname);
-// 		},
-// 		getDatabase: function() {
-// 			return my._db;
-// 		},
-// 		$get: function() {
-// 			return {
-// 				set: my.setDatabase(dbname),
-// 				get: my.getDatabase()
-// 			};
-// 		}
-// 	};
-
-// }]);
-
-//Provider de libros para la estructura
+//Provider de tablas para la estructura de la base de datos
 libreria.provider('tablas', [function() {
-	var _tabla, //Almacena el nombre de la colección
-			_data;	//Almacena la estructura del objeto a guardar
-
+	var self = this; // cambio de scope, "this" ahora es local
+	self._map = [];
+	/*
+	[
+		{
+			_tableName: 'nombre de la colección',
+			_tableData: {'objeto de la estructura de los índices de la colección'}
+		}, ...
+	]
+	*/
 	return {
 		//Configura el nombre de la colección
-		setCollection: function(colname) {
-			var my = this;
-			my._tabla = colname;
+		setCollectionToMap: function(key, name) {
+			try {
+				self._map[key]._tableName = name;
+			} catch (e) { // TypeError si no existe el índice
+				self._map.push({});
+				self._map[key]._tableName = name;
+			}
 		},
 		//Obtiene el nombre de la colección
-		getCollection: function() {
-			var my = this;
-			return my._tabla;
+		getCollectionFromMap: function(key) {
+			try {
+				return self._map[key]._tableName;
+			} catch (e) {
+				console.error('El índice especificado no existe');
+			}
 		},
 		//Configura la estructura de los índices
-		setData: function(data) {
-			var my = this;
-			my._data = data;
+		setDataToMap: function(key, data) {
+			try {
+				self._map[key]._tableData = data;
+			} catch (e) {
+				self._map.push({});
+				self._map[key]._tableData = data;
+			}
 		},
 		//Obtiene la estructura de los índices
-		getData: function() {
-			var my = this;
-			return my._data;
+		getDataFromMap: function(key) {
+			try{
+				return self._map[key]._tableData;
+			} catch (e) {
+				console.error('El índice especificado no existe');
+			}
+		},
+		getMap: function() {
+			return self._map;
 		},
 		//Método proveedor que registra y revela los métodos del provider
 		$get: function() {
-			var my = this;
-
 			return {
-				setCollection: my.setCollection(colname),
-				getCollection: my.getCollection(),
-				setData: my.setData(data),
-				getData: my.getData()
+				setCollectionToMap: self.setCollectionToMap(key, name),
+				getCollectionFromMap: self.getCollectionFromMap(key),
+				setDataToMap: self.setDataToMap(key, data),
+				getDataFromMap: self.getDataToMap(key),
+				getMap: self.getMap()
 			};
 		}
 	};

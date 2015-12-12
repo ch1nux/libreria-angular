@@ -26,7 +26,7 @@
 					<div class="form-group"
 					ng-class="{'has-error': libroForm.categoria.$invalid && libroForm.categoria.$dirty, 'has-success': libroForm.categoria.$valid && libroForm.categoria.$dirty}" ng-controller="CategoriasCtrl">
 						<label class="control-label" for="categoria">Categoría</label>
-						<select class="form-control" ng-model="libro.categoria" name="categoria" id="categoria" required ng-options="categoria.categoria as categoria.nombre | uppercase for categoria in categorias">
+						<select class="form-control" ng-model="libro.categoria" name="categoria" id="categoria" required ng-options="categoria.indice as categoria.nombre | uppercase for categoria in listaCategorias">
 							<option value="">- SELECCIONE -</option>
 						</select>
 					</div>

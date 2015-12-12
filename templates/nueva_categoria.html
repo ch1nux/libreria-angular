@@ -4,7 +4,7 @@
 			<div ng-controller="CategoriasCtrl">
 				<div class="modal-header">
 					<button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Añadir Categoría {{categorias.length+1}}</h4>
+					<h4 class="modal-title">Añadir Categoría {{totalCategorias + 1}}</h4>
 				</div>
 				<div class="modal-body">
 					<form name="categoriaForm" novalidate>
@@ -13,7 +13,7 @@
 							<label class="control-label" for="nombre">Nombre:</label>
 							<input type="text" class="form-control" placeholder="Escriba la categoría" ng-model="nombre" id="nombre" name="nombre" required pattern="[A-Za-zñáéíóú\s\.]+">
 						</div>
-						<button ng-disabled="categoriaForm.$invalid" data-dismiss="modal" class="btn btn-sm btn-primary" ng-click="addCategoria(nombre)">Añadir</button>
+						<button ng-disabled="categoriaForm.$invalid" data-dismiss="modal" data-target="#aviso" class="btn btn-sm btn-primary" ng-click="addCategoria(nombre)">Añadir</button>
 					</form>
 				</div>
 			</div>

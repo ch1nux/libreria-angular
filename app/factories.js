@@ -19,7 +19,7 @@ libreria.factory('libreria', [function () {
 			titulo: "Lo que el viento se llevó",
 			autor: "Margaret Mitchell",
 			anio: "1936",
-			categoria: 3,
+			categoria: { indice: 2, nombre: "Historica" },
 			precio: 575,
 			inventario: 0,
 			existente: false
@@ -28,7 +28,7 @@ libreria.factory('libreria', [function () {
 			titulo: "El Ocho",
 			autor: "Katherine Neville",
 			anio: "1988",
-			categoria: 4,
+			categoria: { indice: 3, nombre: "Misterio"},
 			precio: 850,
 			inventario: 41,
 			existente: true
@@ -37,7 +37,7 @@ libreria.factory('libreria', [function () {
 			titulo: "Bajo La Misma Estrella",
 			autor: "John Green",
 			anio: "2012",
-			categoria: 2,
+			categoria: { indice: 1, nombre: "Romance"},
 			precio: 1290,
 			inventario: 0,
 			existente: false
@@ -46,24 +46,12 @@ libreria.factory('libreria', [function () {
 			titulo: "Fundación",
 			autor: "Isaac Asimov",
 			anio: "1951",
-			categoria: 1,
+			categoria: { indice: 0, nombre: "Ciencia-Ficcion"},
 			precio: 1950,
 			inventario: 9,
 			existente: true
 		}
 	];
-
-	libreria.filtrarLibros = function(categoria) {
-		return libreria.listaLibros.filter(function(libro) {
-			return libro.categoria === categoria;
-		});
-	};
-
-	libreria.addLibro = function(libro) {
-		//propiedad que define la visualización del botón "Comprar"
-		libro.existente = libro.existente || libro.inventario > 0 ? true : false;
-		libreria.listaLibros.push(libro);
-	};
 
 	return libreria;
 }]);
@@ -72,22 +60,16 @@ libreria.factory('catalogo', [function() {
 	var catalogo = {};
 
 	catalogo.Categoria = function (o) {
-		this.categoria = o.categoria;
+		this.indice = o.indice;
 		this.nombre = o.nombre;
 	};
 
 	catalogo.listaCategorias = [
-		{categoria: 1, nombre: "Ciencia-Ficción"},
-		{categoria: 2, nombre: "Romance"},
-		{categoria: 3, nombre: "Histórica"},
-		{categoria: 4, nombre: "Misterio"},
+		{indice: 0, nombre: "Ciencia-Ficcion"},
+		{indice: 1, nombre: "Romance"},
+		{indice: 2, nombre: "Historica"},
+		{indice: 3, nombre: "Misterio"},
 	];
-
-	catalogo.addCategoria = function(name){
-		catalogo.listaCategorias.push(
-			{categoria: catalogo.listaCategorias.length+1, nombre: name}
-		);
-	};
 
 	return catalogo;
 }]);

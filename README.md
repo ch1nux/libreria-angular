@@ -2,13 +2,13 @@
 Tutorial de Angular.js en jotaeseymas.wordpress.com
 # Contenido
 ```
-libreria-angular
+libreria-angular/
 ├── app
 │   ├── config.js
 │   ├── controllers-classy.js
 │   ├── controllers.js
 │   ├── factories.js
-│   ├── providers.js
+│   ├── provider.js
 │   ├── router.js
 │   └── service.js
 ├── external
@@ -35,7 +35,7 @@ libreria-angular
 │   │       └── fontawesome-webfont.woff
 │   └── icono_libro.gif
 └── templates
-    ├── categorias.html
+    ├── aviso.html
     ├── comprar.html
     ├── libros.html
     ├── menu_superior.html

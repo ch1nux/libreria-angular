@@ -1,38 +1,28 @@
 var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
 
-librería.value('$DB', new Dexie('libreria-angular'));
+libreria.value('$msg', 'Agregado a la lista!');
 
-libreria.config(['tablasProvider', '$DB', function (tablasProvider, $DB) {
+libreria.constant('DB', new Dexie('libreria-angular'));
 
-	var config = {};	// Objeto de configuración de Dexie.js
+libreria.config(['tablasProvider', 'DB', function (tablasProvider, DB) {
 
-	// Instanciación de la base de datos
-	// databaseProvider.setDatabase('libreria-angular');
+	var config = {},	// Objeto de configuración de la instancia de Dexie.js
+			map = [
+			{ tableName: 'listaLibros', tableData: { titulo: '', autor: '', anio: 0,	categoria: {/*indice: 0, nombre: ''*/},	precio: 0, inventario: 0,	existente: false } },
+			{	tableName: 'listaCategorias',	tableData: { indice: 0, nombre: '' }	}]; // Mapa de configuración a ser almacenado
 
-	// Configuración de la colección "libros"
-	tablasProvider.setCollection('listaLibros');
-	librosProvider.setData(
-		{ titulo: '', autor: '', anio: 0,	categoria: 0,	precio: 0, inventario: 0,	existente: false }
-	);
+	/* Persistencia de la configuración en tablasProvider */
+	angular.forEach(map, function (value, key) {
+		tablasProvider.setCollectionToMap(key, value.tableName);
+		tablasProvider.setDataToMap(key, value.tableData);
+	});
 
-	// config.listaLibros = { listaLibros: '++id, titulo, autor, anio, categoria, precio, inventario, existente' }
-	config[tablasProvider.getCollection()] = '++id, ' + Object.keys(tablasProvider.getData()).join(', ');
+	/* Sobreescritura de la configuración para Dexie.js */
+	angular.forEach(tablasProvider.getMap(), function (value, key) {
+		config[tablasProvider.getCollectionFromMap(key)] = '++id, ' + Object.keys(tablasProvider.getDataFromMap(key)).join(', ');
+	});
 
-	// Configuración de la colección "categorías"
-	tablasProvider.setCollection('listaCategorias');
-	tablasProvider.setData(
-		{ categoria: 0, nombre: '' }
-	);
-
-	// config.listaCategorias = { listaCategorias: '++id, categoria, nombre' }
-	config[tablasProvider.getCollection()] = '++id, ' + Object.keys(tablasProvider.getData()).join(', ');
-
-	$DB.version(1).stores(config);
-
-	// Instancia de Dexie.js configurada globalmente en $rootScope
-	// this.$DB = databaseProvider.getDatabase();
-
-	// config = { listaLibros: '++id, ~...', listaCategorias: '++id, ~...' }
-	// this.$DB.version(1).stores(config);
+	/* Configuración de la instancia de Dexie.js */
+	DB.version(1).stores(config);
 
 }]);

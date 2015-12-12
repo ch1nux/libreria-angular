@@ -1,79 +1,70 @@
 var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
 
-libreria.service('$crud', ['$q', '$DB', function($q, $DB) {
+libreria.service('$crud', ['$q', 'DB', 'libreria', 'catalogo', function ($q, DB, libreria, catalogo) {
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * $DB es el valor que almacena la instancia de la base de datos creado desde
-	 * la etapa de configuracion
+	 * DB es una constante que almacena la instancia de la base de datos creada
+	 * desde la etapa de configuracion
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	// Instancia del API Promises Q+ de Angular
-	var _q = $q.defer();
+	//Cambio de scope, ahora es local
+	var self = this;
 
-	this.vacio = function(tabla){
-		$DB.open();
-		$DB.table(tabla).count(function(data){
-			_q.resolve(data); // Número de objetos existentes en la BD
-		});
-		$DB.close();
-		return _q.promise;
-	};
-
-	this.llenar = function(tabla, datos, Clase){
-		$DB.open();
+	self.llenar = function (tabla, datos, Clase) {
+		DB.open();
+		var _q = $q.defer(); // Instancia del API Promises Q+ de Angular
 		for (var i = 0; i < datos.length; i++) {
-			$DB.table(tabla).put(new Clase(datos[0])).then(function(data){
-				_q.resolve(data); // Número de objetos insertados en la BD
+			DB.table(tabla).put(new Clase(datos[i])).then(function (counter) {
+				_q.resolve(counter); // Número de objetos insertados en la BD
 			});
 		};
-		$DB.close();
+		DB.close();
 		return _q.promise;
 	};
 
-	this.agregar = function(tabla, item, Clase){
-		$DB.open();
-		$DB.table(tabla).add(new Clase(item)).then(function(data){
-			_q.resolve(data); // Número de objetos insertados en la BD
+	self.agregar = function (tabla, item, Clase) {
+		DB.open();
+		var _q = $q.defer();
+		DB.table(tabla).add(new Clase(item)).then(function (counter) {
+			_q.resolve(counter); // Número de objetos insertados en la BD
 		});
-		$DB.close();
+		DB.close();
 		return _q.promise;
 	};
 
-	this.modificar = function(tabla, id, data, Clase){
-		$DB.open();
-		$DB.table(tabla).update(id, new Clase(data)).then(function(counter){
+	self.modificar = function (tabla, id, data, Clase) {
+		DB.open();
+		var _q = $q.defer();
+		DB.table(tabla).update(id, new Clase(data)).then(function (counter) {
 			_q.resolve(counter); // Número de modificaciones realizadas
 		});
-		$DB.close();
+		DB.close();
 		return _q.promise;
 	};
 
-	this.obtenerTodo = function(tabla){
-		$DB.open();
-		$DB.table(tabla).toArray(function(data){
+	self.obtenerTodo = function (tabla) {
+		DB.open();
+		var _q = $q.defer();
+		DB.table(tabla).toArray(function (data) {
 			_q.resolve(data); // Array con todos los elementos en la BD
 		});
-		$DB.close();
+		DB.close();
 		return _q.promise;
 	};
 
-	this.obtenerUno = function(tabla, id){
-		$DB.open();
-		$DB.table(tabla).where('id').equals(id).toArray(function(data){
-			_q.resolve(data); // Array con el elemento obtenido por clave
-		});
-		$DB.close();
-		return _q.promise;
-	};
+	/* Llenar ambas tablas */
+	var P = [
+		self.obtenerTodo('listaLibros'), 		// [0]
+		self.obtenerTodo('listaCategorias') // [1]
+	];
 
-	this.eliminarUno = function(tabla, id){
-		$DB.open();
-		$DB.table(tabla).where('id').equals(id).delete()
-			.then(function(data){
-				_q.resolve(data); // Número de elementos eliminados con éxito
-			});
-		$DB.close();
-		return _q.promise;
-	};
+	$q.all(P).then(function (data) {
+		if (data[0].length == 0) { // LLenar tabla listaLibros
+			self.llenar('listaLibros', libreria.listaLibros, libreria.Libro);
+		}
+		if (data[1].length == 0) { // Llenar tabla listaCategorias
+			self.llenar('listaCategorias', catalogo.listaCategorias, catalogo.Categoria);
+		}
+	});
 
 }]);

@@ -1,4 +1,4 @@
-var libreria = angular.module('LibreriaApp'); //Se instancia de manera global
+var libreria = angular.module('LibreriaApp') //Se instancia de manera global
 
 libreria.config(['$routeProvider', function($routeProvider) {
 	var rootDir = 'templates';
@@ -7,8 +7,8 @@ libreria.config(['$routeProvider', function($routeProvider) {
 			templateUrl: rootDir+'/libros.html',
 			controller: 'LibrosCtrl'
 		})
-		.when('/categorias/:categoria', {
-			templateUrl: rootDir+'/categorias.html',
+		.when('/categorias/:indice', {
+			templateUrl: rootDir+'/libros.html',
 			controller: 'LibrosCtrl'
 		})
 		.otherwise({ redirectTo: '/' });
