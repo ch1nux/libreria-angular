@@ -32,16 +32,6 @@ libreria.service('$crud', ['$q', 'DB', 'libreria', 'catalogo', function ($q, DB,
 		return _q.promise;
 	};
 
-	self.modificar = function (tabla, id, data, Clase) {
-		DB.open();
-		var _q = $q.defer();
-		DB.table(tabla).update(id, new Clase(data)).then(function (counter) {
-			_q.resolve(counter); // Número de modificaciones realizadas
-		});
-		DB.close();
-		return _q.promise;
-	};
-
 	self.obtenerTodo = function (tabla) {
 		DB.open();
 		var _q = $q.defer();
